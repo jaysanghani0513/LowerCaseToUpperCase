@@ -1,30 +1,59 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 
 export default function TextArea(props) {
-    const Handelclick =()=>
-    {
-        console.log("In handle click function");
-        
-        setText(text.toUpperCase());
-    }
-    const Handleonchange=(event)=>
-    {
-        console.log("In handle on change  function");
-        setText(event.target.value);
-    }
-    const [text, setText] = useState("Enter your text");
-     
-    
+  const Handeluperclick = () => {
+
+    setText(text.toUpperCase());
+  }
+  const Handellowerclick = () => {
+
+    setText(text.toLowerCase());
+  }
+  const Handelcoppyclick = () => {
+
+    var copyText = document.getElementById("myText");
+
+    /* Select the text field */
+    copyText.select();
+
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+
+  }
+  const Handelclearclick = () => {
+
+    setText('');
+  }
+
+  const Handleonchange = (event) => {
+
+    setText(event.target.value);
+  }
+
+  const [text, setText] = useState("");
+
+
   return (
-      <div class="container my-5">
-           <div class="input-group">
-  <span class="input-group-text">{props.title}</span>
-  <textarea class="form-control" aria-label="With textarea" id="myText" value={text} onChange={Handleonchange} ></textarea>
-</div>
-<div class="col-auto my-5">
-    <button type="submit" class="btn btn-primary mb-3" onClick={Handelclick}  >Conver To Upper Case </button>
-  </div>
-</div>
+    <div className="container my-5">
+      <div className="input-group">
+        <span className="input-group-text" style={{ backgroundColor: props.mod === 'light' ? 'white' : '#D3D3D3' }}>{props.title}</span>
+        <textarea className="form-control" aria-label="With textarea" id="myText" value={text} onChange={Handleonchange}
+          style={{
+            backgroundColor: props.mod === 'light' ? 'white' : 'grey'
+          }}></textarea>
+      </div>
+      <div className="col-auto">
+        <button type="submit" className="btn btn-primary mb-3 my-4 mx-3" onClick={Handeluperclick} >Convert To Upper Case</button>
+        <button type="submit" className="btn btn-primary mb-3 my-4 mx-3" onClick={Handellowerclick} >Convert To Lower  Case</button>
+        <button type="submit" className="btn btn-primary mb-3 my-4 mx-3" onClick={Handelcoppyclick} >Coppy text</button>
+        <button type="submit" className="btn btn-primary mb-3 my-4 mx-3" onClick={Handelclearclick} >Clear</button>
+      </div>
+      <div className="container my-5">
+         <h1> Word Analizer </h1>
+      </div>
+
+    </div>
 
   )
 }
